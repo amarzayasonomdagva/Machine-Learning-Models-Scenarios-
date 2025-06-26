@@ -8,7 +8,7 @@ a) Absolutely Terrible
 b) Very Mediocre
 c) Quite Impressive
 
-Absolutely Terrible
+## Absolutely Terrible
 Let’s say Bank of Amuna uses a kNN model to predict whether a loan applicant will default. 1 = Yes default (5% of observations) 0 = No default (95% of observations)
 
 The model uses variables like credit score, income, and employment status to compare applicants and assigns them a group based on their ‘k’ nearest neighbors. The model achieves 50% overall accuracy, which might sound reasonable at first glance, but is actually worse than doing nothing. Since 95% of applicants don’t default, simply predicting “no default” for everyone would already give 95% accuracy. But obviously, what’s the point if we just predict no default for everyone? That doesn’t help the bank make decisions or manage risk. For the kNN model to drop all the way to 50%, it must be misclassifying a huge number of both reliable and risky borrowers. This also suggests that the variables we’re using don’t help the model group the defaulters together. Instead, they’re scattered and mixed in with non-defaulters throughout the feature space. If the k value is very low, like k = 1, the model is extremely sensitive to noise. Setting k = 50 could help smooth out some of that noise, but it still doesn’t solve the core problem. The model can’t distinguish defaulters well because they’re rare and spread out. Even with 50 neighbors, a defaulter is likely to be surrounded by mostly non-defaulters, so they get misclassified. On the other side, some reliable borrowers might get flagged as risky just because of a few nearby outliers from Group 1.
@@ -17,12 +17,12 @@ As a bank, one of my main objectives is to lend to reliable borrowers, so I need
 
 Even with the most optimal chosen k, kNN performs poorly in this setting because of the imbalance data and the lack of clear separation between the groups. Therefore, this model is absolutely terrible for my bank’s objectives in real life.
 
-Very Mediocre
+## Very Mediocre
 Let’s say Amuna’s Animal Shelter uses an LDA model to predict whether a visitor will adopt a dog. 1 = Yes adopt (5% of the observations) 0 = No adopt (95% of the observations)
 
 The model uses variables like time spent in the shelter, number of previous visits, and age group to make predictions. LDA assumes the data for both groups are normally distributed, and it tries to maximize the distance between the means of the two groups (adopters and non-adopters), while also minimizing the variation within each group. LDA can be considered okay in this situation because it uses prior probabilities when making predictions, so it’s aware of the 95–5 imbalance and factors that into the classification. Even with only 50% accuracy, it’s at least making somewhat informed decisions. And even if the data isn’t perfectly normal, LDA might still capture the general trend of each group and build a clean linear rule, which isn’t completely useless. That said, the model still has issues. Its linear boundary isn’t flexible enough to capture the real complexity of adoption behavior. And with only 5% of the data belonging to adopters, it’s still heavily biased toward predicting non-adoption. So even when someone’s features resemble an adopter, they might still get classified as a non-adopter simply because the model expects almost everyone to be one. Adjusting the threshold from its default 0.5 to something lower (like 0.1 or 0.2) might improve the model’s ability to detect actual adopters, but would also increase false positives. Therefore, this model is mediocre.
 
-Quite Impressive
+## Quite Impressive
 I just read some news about Luigi Mangione.
 
 Let’s say a team of Middlebury students uses a tree-based model to predict whether a defendant will be sentenced to death or not in capital punishment cases. 1 = Death sentence (5% of the cases) 0 = No death sentence (95% of the cases)
